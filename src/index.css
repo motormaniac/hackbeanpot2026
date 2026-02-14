@@ -1,6 +1,6 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  line-height: 5;
   font-weight: 400;
 
   color-scheme: light dark;
@@ -25,7 +25,7 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  place-items: top;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -56,13 +56,35 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: #f9f9f9;
+    background-color: #4B4E75;
   }
   a:hover {
     color: #747bff;
   }
   button {
     background-color: #f9f9f9;
+  }
+  .todobackground {
+    background-color: #1b1931;
+    width: 300px;
+    height: 320px;
+    border-radius: 30px;
+  }
+  .timerbackground {
+    background-color: #1b1931;
+    width: 300px;
+    height: 100px;
+    border-radius: 30px;
+    font-size: 5em;
+    
+  }
+
+  .container {
+    
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
   }
 }
