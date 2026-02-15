@@ -1,27 +1,37 @@
-import { useState } from 'react'
+import { useState } from "react";
+import ourisland from "/doghbp.png";
 
 function ImageWidget() {
-  const [imageUrl, setImageUrl] = useState('https://picsum.photos/500/300')
-  const [inputUrl, setInputUrl] = useState('')
+  const [imageUrl, setImageUrl] = useState("https://picsum.photos/500/300");
+  const [inputUrl, setInputUrl] = useState("");
 
   const updateImage = () => {
     if (inputUrl.trim()) {
-      setImageUrl(inputUrl)
-      setInputUrl('')
+      setImageUrl(inputUrl);
+      setInputUrl("");
     }
-  }
+  };
 
   const randomImage = () => {
-    setImageUrl(`https://picsum.photos/500/300?random=${Date.now()}`)
-  }
+    setImageUrl(`https://picsum.photos/500/300?random=${Date.now()}`);
+  };
 
   return (
     <div className="widget image-widget">
-      <h2>🖼️ Image Display</h2>
+      <h2> Your Island</h2>
       <div className="image-container">
-        <img src={imageUrl} alt="Display" />
+        {/* <img src={imageUrl} alt="Display" /> */}
+        <img
+          src={ourisland}
+          className="island"
+          alt="Island"
+          width="5000"
+          height="5000"
+
+        />
       </div>
-      <div className="image-controls">
+
+      {/* <div className="image-controls">
         <input
           type="text"
           value={inputUrl}
@@ -31,9 +41,9 @@ function ImageWidget() {
         />
         <button onClick={updateImage}>Load</button>
         <button onClick={randomImage}>Random</button>
-      </div>
+      </div> */}
     </div>
-  )
+  );
 }
 
-export default ImageWidget
+export default ImageWidget;

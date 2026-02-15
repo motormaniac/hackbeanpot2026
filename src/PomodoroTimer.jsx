@@ -62,7 +62,7 @@ function PomodoroTimer() {
 
   return (
     <div className="widget pomodoro-widget">
-      <h2>🍅 Pomodoro Timer</h2>
+      <h2> Pomodoro Timer</h2>
       <div className="mode-indicator">
         {mode === 'work' ? 'Work Time' : 'Break Time'}
       </div>

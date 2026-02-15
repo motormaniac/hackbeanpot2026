@@ -27,7 +27,7 @@ function TodoList() {
 
   return (
     <div className="widget todo-widget">
-      <h2>📝 Todo List</h2>
+      <h2> Todo List</h2>
       <div className="todo-input">
         <input
           type="text"
