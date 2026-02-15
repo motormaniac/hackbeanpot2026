@@ -1,16 +1,35 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function TodoList() {
-  const [todos, setTodos] = useState([
-    { id: 1, text: 'Learn React', completed: false },
-    { id: 2, text: 'Build a project', completed: false },
-    { id: 3, text: 'Deploy to production', completed: false },
-  ])
+  const [todos, setTodos] = useState([])
   const [inputValue, setInputValue] = useState('')
+  const [firstUse, setFirstUse] = useState(true)
+
+  const createTodo = (text) => {
+    return { id: Date.now(), text, completed: false }
+  }
+
+  useEffect(() => {
+    // Load todos from storage on component mount
+    chrome.storage.local.get(['todos'], (result) => {
+      if (result.todos) {
+        setTodos(result.todos)
+      }
+    })
+  }, [])
+
+  useEffect(() => {
+    if (firstUse) {
+      setFirstUse(false)
+    } else {
+      chrome.storage.local.set({ todos })
+      console.log("Saved: " + todos.length)
+    }
+  }, [todos])
 
   const addTodo = () => {
     if (inputValue.trim()) {
-      setTodos([...todos, { id: Date.now(), text: inputValue, completed: false }])
+      setTodos([...todos, createTodo(inputValue)])
       setInputValue('')
     }
   }
