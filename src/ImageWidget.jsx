@@ -1,28 +1,19 @@
 import { useState } from "react";
-import ourisland from "/doghbp.png";
+
+const ISLAND_IDLE = "./doghbp.png";
+const ISLAND_HOVER = "./doghover.png";
 
 function ImageWidget() {
-  const [imageUrl, setImageUrl] = useState("https://picsum.photos/500/300");
-  const [inputUrl, setInputUrl] = useState("");
-
-  const updateImage = () => {
-    if (inputUrl.trim()) {
-      setImageUrl(inputUrl);
-      setInputUrl("");
-    }
-  };
-
-  const randomImage = () => {
-    setImageUrl(`https://picsum.photos/500/300?random=${Date.now()}`);
-  };
+  const [imageUrl, setImageUrl] = useState(ISLAND_IDLE);
 
   return (
     <div className="widget image-widget">
       <h2> Your Island</h2>
-      <div className="image-container">
-        {/* <img src={imageUrl} alt="Display" /> */}
+      <div className="image-container"
+      onMouseOver={() => setImageUrl(ISLAND_HOVER)}
+      onMouseOut={() => setImageUrl(ISLAND_IDLE)}>
         <img
-          src={ourisland}
+          src={imageUrl}
           className="island"
           alt="Island"
           width="5000"
@@ -30,18 +21,6 @@ function ImageWidget() {
 
         />
       </div>
-
-      {/* <div className="image-controls">
-        <input
-          type="text"
-          value={inputUrl}
-          onChange={(e) => setInputUrl(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && updateImage()}
-          placeholder="Enter image URL..."
-        />
-        <button onClick={updateImage}>Load</button>
-        <button onClick={randomImage}>Random</button>
-      </div> */}
     </div>
   );
 }
