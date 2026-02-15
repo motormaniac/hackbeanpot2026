@@ -1,41 +1,49 @@
 import { useState, useEffect } from 'react'
 
 function PomodoroTimer() {
-  const [minutes, setMinutes] = useState(25)
-  const [seconds, setSeconds] = useState(0)
+  const [time, setTime] = useState(25 * 60) // 25 minutes in seconds
   const [isActive, setIsActive] = useState(false)
   const [mode, setMode] = useState('work') // 'work' or 'break'
+  const [firstUse, setFirstUse] = useState(true)
 
+  // loading and saving state with chrome.storage
+  useEffect(() => {
+    chrome.storage.local.get(['pomodoroState'], (result) => {
+      if (result.pomodoroState) {
+        const { time, isActive, mode } = result.pomodoroState
+        setTime(time)
+        setIsActive(isActive)
+        setMode(mode)
+      }
+    })
+  }, [])
+
+  useEffect(() => {
+    if (firstUse) {
+      setFirstUse(false)
+    } else {
+      chrome.storage.local.set({ pomodoroState: { time, isActive, mode } })
+    }
+  }, [time, isActive, mode])
+
+  // timer functionality
   useEffect(() => {
     let interval = null
 
     if (isActive) {
       interval = setInterval(() => {
-        if (seconds === 0) {
-          if (minutes === 0) {
-            // Timer finished
+        if (time <= 0) {
+            switchMode()
             setIsActive(false)
-            if (mode === 'work') {
-              setMode('break')
-              setMinutes(5)
-            } else {
-              setMode('work')
-              setMinutes(25)
-            }
-          } else {
-            setMinutes(minutes - 1)
-            setSeconds(59)
           }
-        } else {
-          setSeconds(seconds - 1)
-        }
-      }, 1000)
+          return setTime(time => time - 1)
+        }, 1000);
     } else {
       clearInterval(interval)
     }
 
     return () => clearInterval(interval)
-  }, [isActive, minutes, seconds, mode])
+  }, [isActive, time, mode])
 
   const toggleTimer = () => {
     setIsActive(!isActive)
@@ -43,22 +51,22 @@ function PomodoroTimer() {
 
   const resetTimer = () => {
     setIsActive(false)
-    setMode('work')
-    setMinutes(25)
-    setSeconds(0)
+    setTime(mode === 'work' ? 25 * 60 : 5 * 60)
   }
 
   const switchMode = () => {
     setIsActive(false)
     if (mode === 'work') {
       setMode('break')
-      setMinutes(5)
+      setTime(5 * 60)
     } else {
       setMode('work')
-      setMinutes(25)
+      setTime(25 * 60)
     }
-    setSeconds(0)
   }
+
+  const getMinutes = () => Math.floor(time / 60)
+  const getSeconds = () => time % 60
 
   return (
     <div className="widget pomodoro-widget">
@@ -67,7 +75,7 @@ function PomodoroTimer() {
         {mode === 'work' ? 'Work Time' : 'Break Time'}
       </div>
       <div className="timer-display">
-        {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+        {String(getMinutes()).padStart(2, '0')}:{String(getSeconds()).padStart(2, '0')}
       </div>
       <div className="timer-controls">
         <button onClick={toggleTimer}>
