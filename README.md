@@ -1,3 +1,14 @@
+# Study Buddy
+Welcome to Study Buddy: the Chrome extension to get you motivated and keep you focused! When you activate the extension, a sidebar appears with three widgets: a to-do list, a Pomodoro timer, and an island with your own little study buddy to keep you motivated throughout your studies. The to-do list allows you to add items to your list, check them off, and remove them. The timer is inspired by the Pomodoro method, which prompts the user to study for 25 minutes, take a break for five, and come back so they can take care of themselves while studying, prevent burnout, and provide study motivation. The buddy, currently a dog, will be present to provide emotional support for them through their studying journey. Additionally, when the cursor hovers over it, it moves as if it is being pet. We also intentionally chose our color scheme based on what we thought would keep users most motivated, focused, and calm. As students ourselves, the idea of having a Chrome extension to help us get through our work is exceptionally important, and we’re excited to use this idea to help us and other students through their school and work journeys.
+
+## Setup
+1. Open chrome://extensions
+2. Turn on developer mode
+3. Click load unpacked
+4. Selected the `dist` folder from this repository
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
