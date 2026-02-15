@@ -6,7 +6,7 @@ import ImageWidget from "./ImageWidget";
 function App() {
   return (
     <div className="app">
-      <img src="./studybuddy.png" className="logo" alt="Logo" />
+      <img src="./studybuddylogo.png" className="logo" alt="Logo" />
 
       <div className="widgets-container">
         <TodoList />

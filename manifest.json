@@ -1,15 +1,21 @@
 {
   "manifest_version": 3,
-  "name": "My Extension",
+  "name": "StudyBuddy",
   "version": "1.0.0",
-  "permissions":["sidePanel"],
-  "action":{},
+  "permissions": ["sidePanel"],
+  "action": {},
   "background": {
     "service_worker": "service-worker.js",
     "type": "module"
   },
-    
+
   "side_panel": {
     "default_path": "index.html"
+  },
+
+  "icons": {
+    "16": "public/logo128.png",
+    "48": "public/logo128.png",
+    "128": "public/logo128.png"
   }
 }
